@@ -37,7 +37,8 @@ app.use(async (ctx, next) => {
 let urls = fs.readdirSync(__dirname + '/urls')
 urls.forEach((element) => {
     let module = require(__dirname + '/urls/' + element)
-    router.use('/', module.routes(), module.allowedMethods())
+    // router.use('/home', module.routes(), module.allowedMethods()) // path => localhost:3000/home/a/b/c
+    router.use('/' + element.replace('.js', ''), module.routes(), module.allowedMethods())
 })
 app.use(router.routes())
 
